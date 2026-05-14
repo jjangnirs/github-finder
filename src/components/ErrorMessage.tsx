@@ -9,6 +9,7 @@ interface ErrorMessageProps {
  * 에러 및 빈 상태 메시지 컴포넌트
  * - 404 (사용자 없음) 또는 기타 에러 상태를 시각적으로 표시
  * - 에러 유형에 따라 다른 아이콘과 메시지 표시
+ * - 라이트/다크 모드 지원
  */
 const ErrorMessage: React.FC<ErrorMessageProps> = ({ message, username }) => {
   // 404 에러 여부 판단
@@ -22,9 +23,9 @@ const ErrorMessage: React.FC<ErrorMessageProps> = ({ message, username }) => {
       <div className="mb-6">
         {isNotFound ? (
           /* 사용자 없음 아이콘 */
-          <div className="w-24 h-24 bg-gray-800 rounded-full flex items-center justify-center border-2 border-gray-700">
+          <div className="w-24 h-24 bg-gray-100 dark:bg-gray-800 rounded-full flex items-center justify-center border-2 border-gray-200 dark:border-gray-700">
             <svg
-              className="w-12 h-12 text-gray-500"
+              className="w-12 h-12 text-gray-400 dark:text-gray-500"
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"
@@ -45,7 +46,7 @@ const ErrorMessage: React.FC<ErrorMessageProps> = ({ message, username }) => {
           </div>
         ) : isRateLimit ? (
           /* Rate Limit 아이콘 */
-          <div className="w-24 h-24 bg-yellow-900/30 rounded-full flex items-center justify-center border-2 border-yellow-700/50">
+          <div className="w-24 h-24 bg-yellow-50 dark:bg-yellow-900/30 rounded-full flex items-center justify-center border-2 border-yellow-200 dark:border-yellow-700/50">
             <svg
               className="w-12 h-12 text-yellow-500"
               fill="none"
@@ -62,7 +63,7 @@ const ErrorMessage: React.FC<ErrorMessageProps> = ({ message, username }) => {
           </div>
         ) : (
           /* 일반 에러 아이콘 */
-          <div className="w-24 h-24 bg-red-900/30 rounded-full flex items-center justify-center border-2 border-red-700/50">
+          <div className="w-24 h-24 bg-red-50 dark:bg-red-900/30 rounded-full flex items-center justify-center border-2 border-red-200 dark:border-red-700/50">
             <svg
               className="w-12 h-12 text-red-500"
               fill="none"
@@ -81,24 +82,24 @@ const ErrorMessage: React.FC<ErrorMessageProps> = ({ message, username }) => {
       </div>
 
       {/* 에러 제목 */}
-      <h3 className="text-xl font-bold text-white mb-2">
+      <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2">
         {isNotFound ? '사용자를 찾을 수 없습니다' : isRateLimit ? 'API 한도 초과' : '오류 발생'}
       </h3>
 
       {/* 검색한 사용자명 표시 (404인 경우) */}
       {isNotFound && username && (
-        <p className="text-gray-400 mb-2">
-          <span className="text-blue-400 font-mono">"{username}"</span>
+        <p className="text-gray-500 dark:text-gray-400 mb-2">
+          <span className="text-blue-500 dark:text-blue-400 font-mono">"{username}"</span>
           에 해당하는 GitHub 계정이 없습니다.
         </p>
       )}
 
       {/* 에러 메시지 */}
-      <p className="text-gray-500 text-sm max-w-sm">{message}</p>
+      <p className="text-gray-400 dark:text-gray-500 text-sm max-w-sm">{message}</p>
 
       {/* 도움말 텍스트 */}
       {isNotFound && (
-        <p className="mt-4 text-gray-600 text-xs">
+        <p className="mt-4 text-gray-300 dark:text-gray-600 text-xs">
           사용자명의 대소문자와 철자를 확인해주세요.
         </p>
       )}

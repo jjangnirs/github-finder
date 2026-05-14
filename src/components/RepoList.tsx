@@ -35,6 +35,7 @@ const LANGUAGE_COLORS: Record<string, string> = {
  * 저장소 목록 컴포넌트
  * - 최신 저장소 5개를 카드 형태로 표시
  * - 스타 수, 포크 수, 사용 언어 배지 포함
+ * - 라이트/다크 모드 지원
  */
 const RepoList: React.FC<RepoListProps> = ({ repos }) => {
   if (repos.length === 0) return null;
@@ -58,13 +59,13 @@ const RepoList: React.FC<RepoListProps> = ({ repos }) => {
 
   return (
     <div className="mt-6">
-      <h3 className="text-lg font-semibold text-white mb-4 flex items-center gap-2">
+      <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4 flex items-center gap-2">
         {/* 저장소 아이콘 */}
-        <svg className="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <svg className="w-5 h-5 text-gray-500 dark:text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z" />
         </svg>
         최근 저장소
-        <span className="text-sm text-gray-500 font-normal">({repos.length}개)</span>
+        <span className="text-sm text-gray-400 dark:text-gray-500 font-normal">({repos.length}개)</span>
       </h3>
 
       <div className="space-y-3">
@@ -76,12 +77,13 @@ const RepoList: React.FC<RepoListProps> = ({ repos }) => {
             rel="noopener noreferrer"
             className="
               block
-              bg-gray-800
-              border border-gray-700
+              bg-white dark:bg-gray-800
+              border border-gray-200 dark:border-gray-700
               rounded-xl
               p-4
-              hover:border-blue-500
-              hover:bg-gray-750
+              hover:border-blue-400 dark:hover:border-blue-500
+              hover:shadow-md dark:hover:shadow-none
+              hover:bg-gray-50 dark:hover:bg-gray-750
               transition-all
               duration-200
               group
@@ -91,18 +93,18 @@ const RepoList: React.FC<RepoListProps> = ({ repos }) => {
             <div className="flex items-center justify-between mb-2">
               <div className="flex items-center gap-2 min-w-0">
                 <svg
-                  className="w-4 h-4 text-gray-400 flex-shrink-0"
+                  className="w-4 h-4 text-gray-400 dark:text-gray-400 flex-shrink-0"
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
                 >
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z" />
                 </svg>
-                <span className="text-blue-400 group-hover:text-blue-300 font-medium truncate transition-colors duration-200">
+                <span className="text-blue-500 dark:text-blue-400 group-hover:text-blue-600 dark:group-hover:text-blue-300 font-medium truncate transition-colors duration-200">
                   {repo.name}
                 </span>
                 {repo.fork && (
-                  <span className="text-xs text-gray-500 border border-gray-600 rounded-full px-2 py-0.5 flex-shrink-0">
+                  <span className="text-xs text-gray-400 dark:text-gray-500 border border-gray-300 dark:border-gray-600 rounded-full px-2 py-0.5 flex-shrink-0">
                     Fork
                   </span>
                 )}
@@ -110,7 +112,7 @@ const RepoList: React.FC<RepoListProps> = ({ repos }) => {
 
               {/* 외부 링크 아이콘 */}
               <svg
-                className="w-4 h-4 text-gray-600 group-hover:text-gray-400 flex-shrink-0 ml-2 transition-colors duration-200"
+                className="w-4 h-4 text-gray-300 dark:text-gray-600 group-hover:text-gray-500 dark:group-hover:text-gray-400 flex-shrink-0 ml-2 transition-colors duration-200"
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"
@@ -121,13 +123,13 @@ const RepoList: React.FC<RepoListProps> = ({ repos }) => {
 
             {/* 저장소 설명 */}
             {repo.description && (
-              <p className="text-gray-400 text-sm mb-3 line-clamp-2 leading-relaxed">
+              <p className="text-gray-500 dark:text-gray-400 text-sm mb-3 line-clamp-2 leading-relaxed">
                 {repo.description}
               </p>
             )}
 
             {/* 메타 정보: 언어, 스타, 포크, 업데이트 */}
-            <div className="flex flex-wrap items-center gap-4 text-xs text-gray-500">
+            <div className="flex flex-wrap items-center gap-4 text-xs text-gray-400 dark:text-gray-500">
               {/* 사용 언어 */}
               {repo.language && (
                 <div className="flex items-center gap-1.5">

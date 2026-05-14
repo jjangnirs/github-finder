@@ -9,6 +9,7 @@ interface SearchBarProps {
  * 검색 입력 컴포넌트
  * - 실시간 입력 감지 (디바운스는 useGitHub 훅에서 처리)
  * - 접근성을 위한 label 및 aria 속성 포함
+ * - 라이트/다크 모드 지원
  */
 const SearchBar: React.FC<SearchBarProps> = ({ value, onChange }) => {
   return (
@@ -17,7 +18,7 @@ const SearchBar: React.FC<SearchBarProps> = ({ value, onChange }) => {
         {/* 검색 아이콘 */}
         <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
           <svg
-            className="w-5 h-5 text-gray-400"
+            className="w-5 h-5 text-gray-400 dark:text-gray-400"
             fill="none"
             stroke="currentColor"
             viewBox="0 0 24 24"
@@ -42,11 +43,11 @@ const SearchBar: React.FC<SearchBarProps> = ({ value, onChange }) => {
           className="
             w-full
             pl-12 pr-12 py-4
-            bg-gray-800
-            border border-gray-600
+            bg-gray-100 dark:bg-gray-800
+            border border-gray-300 dark:border-gray-600
             rounded-xl
-            text-white
-            placeholder-gray-400
+            text-gray-900 dark:text-white
+            placeholder-gray-400 dark:placeholder-gray-400
             text-base
             focus:outline-none
             focus:ring-2
@@ -65,7 +66,7 @@ const SearchBar: React.FC<SearchBarProps> = ({ value, onChange }) => {
               absolute inset-y-0 right-0 pr-4
               flex items-center
               text-gray-400
-              hover:text-white
+              hover:text-gray-600 dark:hover:text-white
               transition-colors duration-200
             "
             aria-label="검색어 지우기"
